@@ -20,6 +20,7 @@ When run on a cluster, the information is saved in the respective stdout files (
 1. **locally**
 ```
 srun -N 1 -n 1 -c 10 -p interactive --qos qos-interactive --pty bash -i # First, reserve your compute resources: ONE node, ONE task, TEN cores per task, i.e., 10 cores on a single, physical node.
+conda activate conda_env
 snakemake --cores 1 # This will show you/print that the {threads} will evaluate to "1" and ONE rule AFTER the other will be run
 rm [0-9].txt # Clean up
 snakemake --cores 2 # This will show you/print that the {threads} will evaluate to "2" and ONE rule AFTER the other will be run
