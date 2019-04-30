@@ -55,5 +55,5 @@ The number of *threads (cores)* for these rules is determined based on the **spe
 Put differently, when run on a cluster, the `--cores, --jobs, -j` option specifies how many jobs are sent to the submission queue simultaneously.
 Accordingly, it is suggested to not specify a high value here unless you have the capacity (oftentimes the number of simultaneous jobs is limited to some fixed value, e.g., 10 or 100).
 Importantly, unless you do not have an extremely large number of jobs that you need to submit, it is not a problem to specify a conservative `-j` value because, as soon as one job is finished, the next job is automatically submitted to the queue by `snakemake`.
-This is why the wrapper script has `-j 10` here.
+This is why the wrapper script has `-j 2` here, but I typically use `-j 10` in production.
 
