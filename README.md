@@ -38,10 +38,6 @@ snakemake --cores 11 # This will show you/print that the {threads} will evaluate
 or 
 
 2. on a **cluster**
-For this, we use the "wrapper" script `./src/snakemake_run.sh` which defines how to submit individual jobs to the cluster using `slurm`.
-By default, this wrapper script submits TWO jobs (`-j 2`) to the cluster in parallel.
-Here, the behavior of the `-j` option (which is synonymous with `--cores` and `--jobs`) DIFFERS from running `snakemake` *locally*, i.e., two **JOBS** are launched that execute two individual *rules* (instead of defining how many cores-per-rule should be available).
-The number of *threads (cores)* for these rules is determined based on the **specifications in `cluster.json`**, i.e., determined after the job has been submitted to the cluster and the job is actually starting (maybe this info is inferred even while the job is pending, but this is a technical detail which, hopefully, does not matter here).
 ```
 ./src/snakemake_run.sh # With the default cluster.json, {ncpus} is "1".
 # This means that "-N 1 -n 1 -c 1" will be used for EVERY SINGLE job and TWO jobs will be submitted at the same time.
@@ -51,6 +47,11 @@ rm [0-9].txt # Clean up
 # This means that "-N 1 -n 1 -c 2" will be used for EVERY SINGLE job and, still, TWO jobs will be submitted at the same time.
 # Yet the {threads} will now be "2", i.e., based on the changed specification in cluster.json.
 ```
+For this, we use the "wrapper" script `./src/snakemake_run.sh` which defines how to submit individual jobs to the cluster using `slurm`.
+By default, this wrapper script submits TWO jobs (`-j 2`) to the cluster in parallel.
+Here, the behavior of the `-j` option (which is synonymous with `--cores` and `--jobs`) DIFFERS from running `snakemake` *locally*, i.e., two **JOBS** are launched that execute two individual *rules* (instead of defining how many cores-per-rule should be available).
+The number of *threads (cores)* for these rules is determined based on the **specifications in `cluster.json`**, i.e., determined after the job has been submitted to the cluster and the job is actually starting (maybe this info is inferred even while the job is pending, but this is a technical detail which, hopefully, does not matter here).
+
 Put differently, when run on a cluster, the `--cores, --jobs, -j` option specifies how many jobs are sent to the submission queue simultaneously.
 Accordingly, it is suggested to not specify a high value here unless you have the capacity (oftentimes the number of simultaneous jobs is limited to some fixed value, e.g., 10 or 100).
 Importantly, unless you do not have an extremely large number of jobs that you need to submit, it is not a problem to specify a conservative `-j` value because, as soon as one job is finished, the next job is automatically submitted to the queue by `snakemake`.
