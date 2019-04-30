@@ -1,0 +1,12 @@
+{
+    "__default__" :
+    {
+        "time" : "0-00:10:00",
+        "n" : 1,
+        "partition" : "batch",
+        "ncpus": 1,
+        "job-name" : "test.{rule}",
+        "output" : "slurm-%j.%N-%x.out",
+        "error" : "slurm-%j.%N-%x.err"
+    },
+}
