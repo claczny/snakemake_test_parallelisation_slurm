@@ -1,7 +1,10 @@
 Just a repo to test how [snakemake's](https://snakemake.readthedocs.io/en/stable/) parallelisation works when using it locally or on a cluster.
 
 # Set-up
-A few dependencies need to be installed, most notably `conda` and `snakemake`:
+A few dependencies need to be installed, most notably `conda` and `snakemake`.
+This needs to be done when on the **access** node (or at least `snakemake` must be available on the access node) so that `snakemake` eventually is available *before* submitting jobs to the cluster, i.e., so that `snakemake`, itself, can be used to perform the submissions (s. Running the workflow on a cluster, below).
+N.B. You should **NOT** install any other tools when on the access node. But since `snakemake` is frequently updating, the version which is provided system-wide (if at all) might be outdated and, hence, one has to help her-/himself :woman_shrugging: :man_shrugging:).
+
 ```
 mkdir -p $HOME/apps
 cd $HOME/apps/distfiles # 
