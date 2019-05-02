@@ -57,3 +57,5 @@ Accordingly, it is suggested to not specify a high value here unless you have th
 Importantly, unless you do not have an extremely large number of jobs that you need to submit, it is not a problem to specify a conservative `-j` value because, as soon as one job is finished, the next job is automatically submitted to the queue by `snakemake`.
 This is why the wrapper script has `-j 2` here, but I typically use `-j 10` in production.
 
+# TODO
+- What happens if the ` --immediate-submit, --is` option is used? Or, rather, how are the individual job's dependencies encoded? From the description at https://snakemake.readthedocs.io/en/stable/executable.html it seems that there might be a way of how this is done automatically (`{dependencies}`), but it is not clear if and how this would work on the uni.lu HPC.
